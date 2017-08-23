@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>EXO 2</title>
+  </head>
+  <body>
+
+
+    <script type="text/javascript">
+    //création constructeur
+    function guerrier (nom, attack, defense, life) {
+      this.nom = nom;
+      this.attack = attack;
+      this.defense = defense;
+      this.life = life;
+      this.fight = function(autreGuerrier) {
+        console.log(this.nom + " attaque " + autreGuerrier.nom);
+        autreGuerrier.life = autreGuerrier.life -  (this.attack - autreGuerrier.defense);
+        console.log("Pts vie de " + autreGuerrier.nom + " : "+autreGuerrier.life);
+      };
+    }
+
+    //création des objets
+    var guerrier1 = new guerrier("Jacques", 7, 2, 54);
+    var guerrier2 = new guerrier("Tom", 5, 3, 46);
+    var magicien = new guerrier("Oz", 4, 0, 16);
+    magicien.mana = 45;
+    magicien.seSoigner = function() {
+      if (this.mana > 10) {
+        console.log(this.nom + " essaie de se soigner");
+        this.mana-=10;
+        this.life+=10;
+        console.log("mana = "+this.mana);
+        console.log("pts vie = "+this.life);
+      } else {
+        console.log("désolé... avec "+ mana+ " de pts mana, vous n'avez pas assez pour vous soigner");
+      }
+    };
+
+    guerrier1.fight(guerrier2);
+    guerrier2.fight(guerrier1);
+
+    guerrier1.fight(magicien);
+    guerrier2.fight(magicien);
+
+    magicien.seSoigner();
+    magicien.fight(guerrier1);
+
+    </script>
+  </body>
+</html>

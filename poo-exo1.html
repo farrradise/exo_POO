@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>EXO 1</title>
+  </head>
+  <body>
+
+
+    <script type="text/javascript">
+
+    var user = {
+      //properties
+      prenom : "Farrah",
+      nom : "Marzini",
+      pays : "France",
+      age : 27,
+      paiements : ["visa", "mastercard", "virement bancaire"],
+
+      //methods
+      firstName: function () {
+        alert(this.prenom);
+      },
+      familyName: function () {
+        alert(this.nom);
+      },
+      yearBorn: function () {
+        return alert(2017 - this.age);
+      }
+    };
+
+    //user.firstName();
+    //user.familyName();
+    //user.yearBorn();
+
+
+    var check = {
+      //properties
+      authorizedCountries : ["FRANCE", "BELGIQUE", "LUXEMBOURG"],
+      authorizedPaymentsMeants : ["VISA", "MASTERCARD", "ESPECE"],
+      legalAge : 21,
+
+      //method
+      checkComplet : function () {
+        //verification de l'âge
+        if(check.legalAge <= user.age) {
+          alert("Ok, c'est bon vous êtes âgé de plus de 21ans");
+        }
+
+        //vérification du pays
+        if (check.authorizedCountries.indexOf(user.pays.toUpperCase() !== -1)){
+          alert("Vous êtes autorisé à entrer sur le site car votre pays est : "+ user.pays);
+        }
+
+        //vérification des paiements
+        var lesPaiements = "Voici les paiements autorisés : ";
+        for (i=0; i<user.paiements.length; i++) {
+          for (j=0; j<check.authorizedPaymentsMeants.length; j++) {
+            if (user.paiements[i].toUpperCase() == check.authorizedPaymentsMeants[j]) {
+             lesPaiements += user.paiements[i] + " - ";
+            }
+          }
+        }
+        alert(lesPaiements);
+      }
+    };
+
+    check.checkComplet();
+
+    </script>
+  </body>
+</html>

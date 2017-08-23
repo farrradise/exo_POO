@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>EXO 3</title>
+    <style media="screen">
+      * {color : black;}
+
+      div {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-around;
+        align-content: space-around;
+      }
+
+      article {
+        background-color: lightgreen;
+        padding: 10px;
+        margin: 1em;
+        overflow: auto;
+        min-width: 250px;
+        max-width: 45%;
+        flex : 1;
+        /*border: 2px double black;*/
+      }
+
+      article * {
+        color: gray;
+
+      }
+
+      form {
+        text-align: center;
+        background-color: lightblue;
+      }
+      form * {
+        margin: 1em;
+        font-weight: bold;
+      }
+
+      label {
+        color: white;
+      }
+
+      input {
+        color: gray;
+      }
+    </style>
+  </head>
+  <body>
+
+    <form class="" action="poo-exo3.html" method="post">
+      <label for="titre">Nom du produit : </label><input type="text" id="titre" name="" onchange="leTest()"><br>
+      <label for="summarize">Résumé : </label><input type="text" id="summarize" name=""><br>
+      <label for="description">Description : </label><input type="text" id="description" name=""><br>
+      <input type="button" id="envoyer" name="" value="Créer fiche produit">
+
+    </form>
+    <div>
+
+    </div>
+
+
+    <script type="text/javascript">
+    var input = document.getElementsByTagName('input');
+
+    //création constructeur
+        function FicheProduit (title, sentence, description) {
+          this.titre = title;
+          this.phrase = sentence;
+          this.desc = description;
+
+          this.decrire = function () {
+            console.log(this.titre + " " + this.phrase+ " " + this.desc);
+          }
+
+          this.creationFiche = function () {
+            var newArticle = document.createElement("article");
+            var titreArticle = document.createElement("h2");
+            var phraseArticle = document.createElement("h3");
+            var descriptionArticle = document.createElement("p");
+            var contentTitreArticle = document.createTextNode("Nom du produit : " + this.titre);
+            var contentPhraseArticle = document.createTextNode("Résumé : " + this.phrase);
+            var contentDescriptionArticle = document.createTextNode("Descriptif : "+ this.desc);
+            titreArticle.appendChild(contentTitreArticle);
+            phraseArticle.appendChild(contentPhraseArticle);
+            descriptionArticle.appendChild(contentDescriptionArticle);
+            newArticle.appendChild(titreArticle);
+            newArticle.appendChild(phraseArticle);
+            newArticle.appendChild(descriptionArticle);
+
+            var element = document.getElementsByTagName("div")[0];
+            element.appendChild(newArticle);
+          }
+
+        }
+
+    //creation fonction à l'envoie du formulaire
+     function LeForm (){
+      // this.titre = titre;
+      // this.phrase = phrase;
+      // this.desc = desc;
+         // var produit : {},
+          this.validation =function () {
+
+          if ((input[0].value !== "") && (input[1].value !== "") && (input[2].value !== "")) {
+
+             var produit = new FicheProduit(input[0].value, input[1].value, input[2].value);
+
+            input[0].value = "";
+            input[1].value = "";
+            input[2].value = "";
+         //   produit.decrire();
+            produit.creationFiche();
+          } else {
+            alert("veuillez renseigner tous les champs svp");
+          }
+
+       }
+     }
+
+
+      // gestionnaire devenement
+    document.getElementById("envoyer").addEventListener("click", function() {
+      form = new LeForm();
+      form.validation();
+//      produit.decrire();
+    });
+
+
+    </script>
+  </body>
+</html>
